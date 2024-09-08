@@ -1,0 +1,11 @@
+// Static tasks configuration.
+//
+// Example:
+[
+  {
+    "label": "1-run",
+    "command": "python ./1.py",
+    "use_new_terminal": false,
+    "reveal": "never"
+  }
+]
