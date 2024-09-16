@@ -35,7 +35,7 @@
 //! # Part 2
 //! The Elf says they've stopped producing snow because they aren't getting any water! He isn't sure why the water stopped; however,
 //! he can show you how to get to the water source to check it out for yourself. It's just up ahead!
-//! As you continue your walk, the Elf poses a second question: in each game you played, what is the fewest number of cubes of each color 
+//! As you continue your walk, the Elf poses a second question: in each game you played, what is the fewest number of cubes of each color
 //! that could have been in the bag to make the game possible?
 //! Again consider the example games from earlier:
 //! ```
@@ -53,7 +53,7 @@
 //! The power of a set of cubes is equal to the numbers of red, green, and blue cubes multiplied together. The power of the minimum set of cubes in game 1 is 48. In games 2-5 it was 12, 1560, 630, and 36, respectively. Adding up these five powers produces the sum 2286.
 //! For each game, find the minimum set of cubes that must have been present. What is the sum of the power of these sets?
 
-use std::fs;
+use std::{cmp::max, fs};
 
 pub fn solve() {
     println!("-------------------------- advent of code 2023 day 2 --------------------------");
@@ -101,5 +101,31 @@ pub fn solve() {
     }
 
     let sum: u32 = possible_games.iter().sum();
-    println!("sum: {}", sum);
+    println!("part 1 solution: {}", sum);
+
+    // part 2 solution
+    let mut power = 0;
+    for line in fs::read_to_string("./src/aoc_2023_day_2").unwrap().lines() {
+
+        let mut red = 0;
+        let mut green = 0;
+        let mut blue = 0;
+
+        for round in line.split(":").nth(1).unwrap().split(";") {
+            for game in round.split(",") {
+                let mut game_segments = game.trim().split(" ");
+                let count = game_segments.next().unwrap().parse::<u32>().unwrap();
+                match game_segments.next().unwrap() {
+                    "red" => { red = max(red, count) }
+                    "green" => { green = max(green, count)}
+                    "blue" => { blue = max(blue, count)}
+                    _ => unreachable!(),
+                }
+            }
+        }
+
+        power += red * green * blue;
+    }
+
+    println!("part 2 solution: {}", power);
 }
