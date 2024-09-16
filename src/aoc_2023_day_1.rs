@@ -45,6 +45,7 @@ use regex::Regex;
 use std::{collections::HashMap, fs};
 
 pub fn solve() {
+    println!("-------------------------- advent of code 2023 day 1 --------------------------");
     let numbers = HashMap::from([
         ("one", "o1e"),
         ("two", "t2o"),
@@ -66,7 +67,6 @@ pub fn solve() {
         }
         let first = re.find(l.as_str()).unwrap();
         let last = re.find_iter(l.as_str()).last().unwrap();
-        println!("{}___{}___{}", l, first.as_str(), last.as_str());
         sum += format!("{}{}", first.as_str(), last.as_str())
             .parse::<u64>()
             .unwrap()
