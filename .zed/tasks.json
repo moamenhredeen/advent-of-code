@@ -1,7 +1,0 @@
-[
-  {
-    "label": "aoc-run",
-    "command": "cargo run",
-    "reveal": "never"
-  }
-]
